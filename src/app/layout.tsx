@@ -5,8 +5,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
-  variable: "--font-montserrat",
-  weight: ["500"],
+  variable: "--font-sans",
 });
 
 export const metadata: Metadata = {
