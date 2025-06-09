@@ -57,7 +57,7 @@ function ProtectedLayout({ children }: { children: React.ReactNode }) {
   return (
     <div>
       <ProtectedLayoutHeader user={user!} />
-      {children}
+      <div className="p-5">{children}</div>
     </div>
   );
 }

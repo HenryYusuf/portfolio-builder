@@ -27,11 +27,13 @@ function SignOutButton() {
   };
 
   return (
-    <div>
-      <Button className="cursor-pointer" disabled={loading} onClick={onSignOut}>
-        Sign Out
-      </Button>
-    </div>
+    <Button
+      className="w-full cursor-pointer"
+      disabled={loading}
+      onClick={onSignOut}
+    >
+      Sign Out
+    </Button>
   );
 }
 
