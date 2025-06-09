@@ -14,7 +14,6 @@ async function AccountPage() {
   
   const supabaseUserResponse = await getCurrentUser();
 
-  console.log(supabaseUserResponse);
   return (
     <div className="flex flex-col gap-5 p-5">
       <h1>Account Page</h1>
