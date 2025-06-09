@@ -9,6 +9,8 @@ import { getCurrentUser } from "@/actions/users";
 
 // Components
 import ProtectedLayoutHeader from "./_components/header";
+import Spinner from "@/components/ui/spinner";
+import toast from "react-hot-toast";
 
 function ProtectedLayout({ children }: { children: React.ReactNode }) {
   const [user, setUser] = React.useState<IUser | null>(null);
@@ -26,7 +28,7 @@ function ProtectedLayout({ children }: { children: React.ReactNode }) {
         throw new Error("Error fetching user data");
       }
     } catch (error: any) {
-      console.error(error.message);
+      toast.error(error.message);
     } finally {
       setLoading(false);
     }
@@ -39,16 +41,17 @@ function ProtectedLayout({ children }: { children: React.ReactNode }) {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <h1>Loading...</h1>
+        <Spinner />
       </div>
     );
   }
 
-  if (!loading && !user)
-  {
-    return <div>
-      <h1>Error fetching user data</h1>
-    </div>
+  if (!loading && !user) {
+    return (
+      <div>
+        <h1>Error fetching user data</h1>
+      </div>
+    );
   }
 
   return (
