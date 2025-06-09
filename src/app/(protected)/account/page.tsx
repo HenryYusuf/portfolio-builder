@@ -6,9 +6,15 @@ import { currentUser } from "@clerk/nextjs/server";
 import { UserButton } from "@clerk/nextjs";
 import SignOutButton from "@/components/functional/sign-out-button";
 
+// Actions
+import { getCurrentUser } from "@/actions/users";
+
 async function AccountPage() {
   const loggedInUser = await currentUser();
   
+  const supabaseUserResponse = await getCurrentUser();
+
+  console.log(supabaseUserResponse);
   return (
     <div className="flex flex-col gap-5 p-5">
       <h1>Account Page</h1>
