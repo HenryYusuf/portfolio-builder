@@ -4,12 +4,15 @@ import { MenuIcon } from "lucide-react";
 
 // Components
 import { Button } from "@/components/ui/button";
-
-// Interfaces
-import { IUser } from "@/interfaces";
 import ProtectedLayoutSidebar from "./sidebar";
 
-function ProtectedLayoutHeader({ user }: { user: IUser }) {
+// Global Store
+import usersGlobalStore, {
+  IUsersGlobalStore,
+} from "@/global-store/users-store";
+
+function ProtectedLayoutHeader() {
+  const { user } = usersGlobalStore() as IUsersGlobalStore;
   const [openSidebar, setOpenSidebar] = React.useState(false);
 
   return (
@@ -17,7 +20,9 @@ function ProtectedLayoutHeader({ user }: { user: IUser }) {
       <h1 className="font-bold text-2xl text-primary">P | B</h1>
 
       <div className="flex gap-5 items-center">
-        <span className="text-sm text-foreground">{user.name}</span>
+        <span className="text-sm text-foreground font-semibold">
+          {user?.name}
+        </span>
         <Button
           variant={"ghost"}
           className="cursor-pointer"

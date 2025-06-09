@@ -1,8 +1,6 @@
 // Package
 import React, { useEffect } from "react";
-
-// Interfaces
-import { IUser } from "@/interfaces";
+import toast from "react-hot-toast";
 
 // Actions
 import { getCurrentUser } from "@/actions/users";
@@ -10,10 +8,12 @@ import { getCurrentUser } from "@/actions/users";
 // Components
 import ProtectedLayoutHeader from "./_components/header";
 import Spinner from "@/components/ui/spinner";
-import toast from "react-hot-toast";
+
+// Global Store
+import usersGlobalStore, { IUsersGlobalStore } from "@/global-store/users-store";
 
 function ProtectedLayout({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = React.useState<IUser | null>(null);
+  const {user, setUser} = usersGlobalStore() as IUsersGlobalStore;
   const [loading, setLoading] = React.useState<boolean>(false);
 
   const fetchUser = async () => {
@@ -56,7 +56,7 @@ function ProtectedLayout({ children }: { children: React.ReactNode }) {
 
   return (
     <div>
-      <ProtectedLayoutHeader user={user!} />
+      <ProtectedLayoutHeader />
       <div className="p-5">{children}</div>
     </div>
   );
