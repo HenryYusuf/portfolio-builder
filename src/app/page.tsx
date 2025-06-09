@@ -1,8 +1,21 @@
-"use client"
+"use client";
 
-import { Button } from "@/components/ui/button";
-import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+// Package
 import React from "react";
+import { useSearchParams } from "next/navigation";
+
+// Components
+import { Button } from "@/components/ui/button";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet";
+import { SignUp, SignIn } from "@clerk/nextjs";
+
+// Extras
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
 const menuItems = [
   {
@@ -20,6 +33,11 @@ const menuItems = [
 ];
 
 function Homepage() {
+  const [openSheet, setOpenSheet] = React.useState(false);
+
+  const searchParams: any = useSearchParams();
+  const formType = searchParams.get("formType");
+
   return (
     <div className="flex flex-col min-h-screen">
       <div className="flex justify-between items-center bg-secondary px-20 py-5">
@@ -31,13 +49,19 @@ function Homepage() {
           {menuItems.map((item) => (
             <span
               key={item.title}
-              className={`p-5 text-sm font-bold text-gray-600 cursor-pointer rounded-md hover:bg-accent ${item.path === '/' ? 'bg-primary text-primary-foreground hover:bg-primary/90' : ''}`}
+              className={`p-5 text-sm font-bold text-gray-600 cursor-pointer rounded-md hover:bg-accent ${
+                item.path === "/"
+                  ? "bg-primary text-primary-foreground hover:bg-primary/90"
+                  : ""
+              }`}
             >
               {item.title}
             </span>
           ))}
 
-          <Button className="cursor-pointer">Sign In</Button>
+          <Button className="cursor-pointer" onClick={() => setOpenSheet(true)}>
+            Sign In
+          </Button>
         </div>
       </div>
 
@@ -63,6 +87,30 @@ function Homepage() {
           />
         </div>
       </div>
+
+      {openSheet && (
+        <Sheet open={openSheet} onOpenChange={setOpenSheet}>
+          <SheetContent className="min-w-[500px] flex justify-center items-center">
+            <SheetHeader>
+              <SheetTitle></SheetTitle>
+            </SheetHeader>
+
+            {formType === "sign-in" ? (
+              <SignIn
+                routing="hash"
+                signUpUrl="/?formType=sign-up"
+                fallbackRedirectUrl="/account"
+              />
+            ) : (
+              <SignUp
+                routing="hash"
+                signInUrl="/?formType=sign-in"
+                fallbackRedirectUrl="/account"
+              />
+            )}
+          </SheetContent>
+        </Sheet>
+      )}
     </div>
   );
 }
