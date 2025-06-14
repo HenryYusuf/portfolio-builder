@@ -72,3 +72,26 @@ export const getCurrentUser = async () => {
     };
   }
 };
+
+export const updateCurrentUser = async (userData: any) => {
+  try {
+    const { data, error } = await supabase
+      .from("user_profiles")
+      .update(userData)
+      .eq("id", userData.id);
+
+    if (error) {
+      throw new Error("Error updating user data");
+    }
+
+    return {
+      success: true,
+      data: data,
+    };
+  } catch (error: any) {
+    return {
+      success: false,
+      error: error.message,
+    };
+  }
+};
