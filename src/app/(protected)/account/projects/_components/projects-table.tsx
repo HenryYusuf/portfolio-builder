@@ -65,7 +65,6 @@ function ProjectsTable({ projects }: { projects: IProject[] }) {
   return (
     <div className="mt-7">
       <Table className="border">
-        <TableCaption>A list of your recent invoices.</TableCaption>
         <TableHeader>
           <TableRow>
             {columns.map((column, index) => (
