@@ -1,6 +1,5 @@
 "use client";
 
-import { IProject } from "@/interfaces";
 import React from "react";
 
 import {
@@ -22,27 +21,37 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+import { IExperience } from "@/interfaces";
+
 import { Button } from "@/components/ui/button";
 import { PencilIcon, Trash2 } from "lucide-react";
 import dayjs from "dayjs";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
-import { deleteProjectById } from "@/actions/projects";
+import { deleteExperienceById } from "@/actions/experiences";
 
-function ProjectsTable({ projects }: { projects: IProject[] }) {
+function ExperiencesTable({ experiences }: { experiences: IExperience[] }) {
   const [open, setOpen] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
-  const [selectedProjectIdToDelete, setSelectedProjectIdToDelete] =
+  const [selectedExperienceIdToDelete, setSelectedExperienceIdToDelete] =
     React.useState<string | null>(null);
   const router = useRouter();
-  const columns = ["Name", "Demo Link", "Repo Link", "Created At", "Actions"];
+  const columns = [
+    "Role",
+    "Company",
+    "Start Date",
+    "End Date",
+    "Location",
+    "Created At",
+    "Actions",
+  ];
 
-  const deleteProjectHandler = async (id: string | null) => {
+  const deleteExperienceHandler = async (id: string | null) => {
     try {
       setLoading(true);
 
-      setSelectedProjectIdToDelete(id);
-      let response = await deleteProjectById(id!);
+      setSelectedExperienceIdToDelete(id);
+      let response = await deleteExperienceById(id!);
 
       if (!response.success) {
         throw new Error(response.message);
@@ -52,13 +61,13 @@ function ProjectsTable({ projects }: { projects: IProject[] }) {
     } catch (error: any) {
       toast.error(error.message);
     } finally {
-      setSelectedProjectIdToDelete(null);
+      setSelectedExperienceIdToDelete(null);
       setLoading(false);
     }
   };
 
   const openAlertDialog = (id: string) => {
-    setSelectedProjectIdToDelete(id);
+    setSelectedExperienceIdToDelete(id);
     setOpen(true);
   };
 
@@ -76,20 +85,26 @@ function ProjectsTable({ projects }: { projects: IProject[] }) {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {projects.map((project, index) => (
-            <TableRow key={project.id}>
-              <TableCell>{project.name}</TableCell>
-              <TableCell>{project.demo_link}</TableCell>
-              <TableCell>{project.repo_link}</TableCell>
+          {experiences.map((experience, index) => (
+            <TableRow key={experience.id}>
+              <TableCell>{experience.role}</TableCell>
+              <TableCell>{experience.company}</TableCell>
               <TableCell>
-                {dayjs(project.created_at).format("DD MMMM YYYY")}
+                {dayjs(experience.start_date).format("DD MMMM YYYY")}
+              </TableCell>
+              <TableCell>
+                {dayjs(experience.end_date).format("DD MMMM YYYY")}
+              </TableCell>
+              <TableCell>{experience.location}</TableCell>
+              <TableCell>
+                {dayjs(experience.created_at).format("DD MMMM YYYY")}
               </TableCell>
               <TableCell>
                 <div className="flex gap-5">
                   <Button
                     variant={"outline"}
                     size={"icon"}
-                    onClick={() => openAlertDialog(project.id)}
+                    onClick={() => openAlertDialog(experience.id)}
                     className="cursor-pointer"
                   >
                     <Trash2 size={12} />
@@ -99,7 +114,7 @@ function ProjectsTable({ projects }: { projects: IProject[] }) {
                     size={"icon"}
                     className="cursor-pointer"
                     onClick={() =>
-                      router.push(`/account/projects/edit/${project.id}`)
+                      router.push(`/account/experiences/edit/${experience.id}`)
                     }
                   >
                     <PencilIcon size={12} />
@@ -123,7 +138,7 @@ function ProjectsTable({ projects }: { projects: IProject[] }) {
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
             <AlertDialogAction
-              onClick={() => deleteProjectHandler(selectedProjectIdToDelete)}
+              onClick={() => deleteExperienceHandler(selectedExperienceIdToDelete)}
               disabled={loading}
             >
               Continue
@@ -135,4 +150,4 @@ function ProjectsTable({ projects }: { projects: IProject[] }) {
   );
 }
 
-export default ProjectsTable;
+export default ExperiencesTable;

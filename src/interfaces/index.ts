@@ -21,3 +21,15 @@ export interface IProject {
   image: string;
   created_at: string;
 }
+
+export interface IExperience {
+  id: string;
+  user_id: string;
+  company: string;
+  role: string;
+  start_date: string;
+  end_date: string;
+  description: string;
+  location: string;
+  created_at: string;
+}
