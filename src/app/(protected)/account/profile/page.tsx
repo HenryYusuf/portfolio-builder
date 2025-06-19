@@ -26,7 +26,6 @@ import Editor from "react-simple-wysiwyg";
 import toast from "react-hot-toast";
 import { uploadFileAndGetUrl } from "@/utils/upload-image";
 import { updateCurrentUser } from "@/actions/users";
-import { error } from "console";
 
 function ProfilePage() {
   const [selectedFile, setSelectedFile] = React.useState<File | null>(null);
@@ -163,7 +162,7 @@ function ProfilePage() {
                     onChange={(e) => {
                       setSelectedFile(e.target.files![0]);
                     }}
-                    className="w-max bg-primary-foreground"
+                    className="w-max"
                   />
                 </FormControl>
                 <FormMessage />

@@ -10,10 +10,12 @@ import ProtectedLayoutHeader from "./_components/header";
 import Spinner from "@/components/ui/spinner";
 
 // Global Store
-import usersGlobalStore, { IUsersGlobalStore } from "@/global-store/users-store";
+import usersGlobalStore, {
+  IUsersGlobalStore,
+} from "@/global-store/users-store";
 
 function ProtectedLayout({ children }: { children: React.ReactNode }) {
-  const {user, setUser} = usersGlobalStore() as IUsersGlobalStore;
+  const { user, setUser } = usersGlobalStore() as IUsersGlobalStore;
   const [loading, setLoading] = React.useState<boolean>(false);
 
   const fetchUser = async () => {
@@ -35,7 +37,9 @@ function ProtectedLayout({ children }: { children: React.ReactNode }) {
   };
 
   useEffect(() => {
-    fetchUser();
+    if (!user) {
+      fetchUser();
+    }
   }, []);
 
   if (loading) {
