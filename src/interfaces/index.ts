@@ -54,3 +54,12 @@ export interface IEducation {
   percentage: number;
   created_at: string;
 }
+
+export interface IQuery {
+  id: string;
+  name: string;
+  email: string;
+  message: string;
+  user_id: string;
+  created_at: string;
+}

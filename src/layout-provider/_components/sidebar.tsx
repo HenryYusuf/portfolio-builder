@@ -11,7 +11,9 @@ import {
   Home,
   LaptopMinimalCheck,
   ListCheck,
+  Mail,
   Presentation,
+  Settings,
   User,
 } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
@@ -57,6 +59,16 @@ function ProtectedLayoutSidebar({
       path: "/account/experiences",
       icon: <ListCheck size={25} />,
     },
+    {
+      title: "Configurations",
+      path: "/account/configurations",
+      icon: <Settings size={25} />,
+    },
+    {
+      title: "Queries",
+      path: "/account/queries",
+      icon: <Mail size={25} />,
+    },
   ];
 
   return (
@@ -66,7 +78,7 @@ function ProtectedLayoutSidebar({
           <SheetTitle></SheetTitle>
         </SheetHeader>
 
-        <div className="flex flex-col gap-7 mx-10 mt-10">
+        <div className="flex flex-col gap-4 mx-10 mt-10">
           {menuItems.map((item) => (
             <div
               key={item.title}
@@ -77,7 +89,7 @@ function ProtectedLayoutSidebar({
               }`}
               onClick={() => {
                 router.push(item.path);
-                onClose(); 
+                onClose();
               }}
             >
               {item.icon}
