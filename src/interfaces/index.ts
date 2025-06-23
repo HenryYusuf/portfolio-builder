@@ -42,3 +42,15 @@ export interface ISkill {
   image: string;
   created_at: string;
 }
+
+export interface IEducation {
+  id: string;
+  user_id: string;
+  degree: string;
+  institution: string;
+  location: string;
+  start_date: string;
+  end_date: string;
+  percentage: number;
+  created_at: string;
+}
