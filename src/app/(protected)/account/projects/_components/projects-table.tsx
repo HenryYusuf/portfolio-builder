@@ -35,7 +35,7 @@ function ProjectsTable({ projects }: { projects: IProject[] }) {
   const [selectedProjectIdToDelete, setSelectedProjectIdToDelete] =
     React.useState<string | null>(null);
   const router = useRouter();
-  const columns = ["Name", "Demo Link", "Repo Link", "Created At", "Actions"];
+  const columns = ["Nama Project", "Demo Link", "Repo Link", "Dibuat Pada", "Aksi"];
 
   const deleteProjectHandler = async (id: string | null) => {
     try {
@@ -116,7 +116,7 @@ function ProjectsTable({ projects }: { projects: IProject[] }) {
             <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
             <AlertDialogDescription>
               This action cannot be undone. This will permanently delete your
-              account and remove your data from our servers.
+              data and remove your data from our servers.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>

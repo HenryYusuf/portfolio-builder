@@ -24,6 +24,12 @@ import usersGlobalStore, {
 } from "@/global-store/users-store";
 import { addNewEducation, editEducationById } from "@/actions/educations";
 
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+
 interface EducationFormProps {
   initialValues?: any;
   formType?: "add" | "edit";
@@ -53,7 +59,7 @@ function EducationForm({
       start_date: initialValues?.start_date || "",
       end_date: initialValues?.end_date || "",
       location: initialValues?.location || "",
-      percentage: initialValues?.percentage || 0,
+      percentage: initialValues?.percentage || "",
     },
   });
 
@@ -95,9 +101,9 @@ function EducationForm({
               name="degree"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Degree</FormLabel>
+                  <FormLabel>Gelar Kamu</FormLabel>
                   <FormControl>
-                    <Input placeholder="Senior Software Engineer" {...field} />
+                    <Input placeholder="Sarjana Teknik" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -108,9 +114,9 @@ function EducationForm({
               name="institution"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Institution</FormLabel>
+                  <FormLabel>Nama Lembaga</FormLabel>
                   <FormControl>
-                    <Input placeholder="Senior Software Engineer" {...field} />
+                    <Input placeholder="Oxford University" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -121,9 +127,9 @@ function EducationForm({
               name="location"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Location</FormLabel>
+                  <FormLabel>Lokasi</FormLabel>
                   <FormControl>
-                    <Input placeholder="Senior Software Engineer" {...field} />
+                    <Input placeholder="London" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -134,7 +140,7 @@ function EducationForm({
               name="start_date"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Start Date</FormLabel>
+                  <FormLabel>Tahun Mulai</FormLabel>
                   <FormControl>
                     <Input type="date" {...field} />
                   </FormControl>
@@ -147,7 +153,7 @@ function EducationForm({
               name="end_date"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>End Date</FormLabel>
+                  <FormLabel>Tahun Selesai</FormLabel>
                   <FormControl>
                     <Input type="date" {...field} />
                   </FormControl>
@@ -160,11 +166,28 @@ function EducationForm({
               name="percentage"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Percentage</FormLabel>
+                  <Tooltip>
+                    <TooltipTrigger className="w-max">
+                      <FormLabel>
+                        Nilai <span className="text-destructive">*</span>
+                      </FormLabel>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>
+                        Jika nilai IPK kamu 3.5, maka persentase kamu adalah
+                        ((nilai ipk|gpa / 4) * 100).
+                      </p>
+                      <p>Kemudian bulatkan ke atas agar tidak terjadi error</p>
+                    </TooltipContent>
+                  </Tooltip>
                   <FormControl>
-                    <Input placeholder="" {...field} onChange={(e) => {
-                      form.setValue("percentage", Number(e.target.value));
-                    }} />
+                    <Input
+                      placeholder="75"
+                      {...field}
+                      onChange={(e) => {
+                        form.setValue("percentage", parseInt(e.target.value));
+                      }}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

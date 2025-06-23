@@ -25,7 +25,7 @@ async function EducationsPage() {
         <h1 className="text-xl font-bold">Educations</h1>
 
         <Button>
-          <Link href="/account/educations/add">Tambah Experience</Link>
+          <Link href="/account/educations/add">Tambah Education</Link>
         </Button>
       </div>
 

@@ -37,14 +37,14 @@ function EducationsTable({ educations }: { educations: IEducation[] }) {
     React.useState<string | null>(null);
   const router = useRouter();
   const columns = [
-    "Degree",
-    "Institution",
-    "Location",
-    "Start Date",
-    "End Date",
-    "Percentage",
-    "Created At",
-    "Actions",
+    "Gelar",
+    "Lembaga",
+    "Lokasi",
+    "Tahun Mulai",
+    "Tahun Selesai",
+    "Nilai",
+    "Dibuat Pada",
+    "Aksi",
   ];
 
   const deleteEducationHandler = async (id: string | null) => {
@@ -133,7 +133,7 @@ function EducationsTable({ educations }: { educations: IEducation[] }) {
             <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
             <AlertDialogDescription>
               This action cannot be undone. This will permanently delete your
-              account and remove your data from our servers.
+              data and remove your data from our servers.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>

@@ -61,7 +61,7 @@ function SkillsPage() {
     fetchData();
   }, []);
 
-  const columns = ["", "Name", "Level", "Actions"];
+  const columns = ["", "Nama Skill", "Level Skill", "Aksi"];
 
   const openAlertDialog = (skill: ISkill | null) => {
     setSelectedSkill(skill);
@@ -179,10 +179,11 @@ function SkillsPage() {
             <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
             <AlertDialogDescription>
               This action cannot be undone. This will permanently delete your
-              account and remove your data from our servers.
+              data and remove your data from our servers.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
             <AlertDialogAction
               onClick={() => deleteSkillHandler(selectedSkill)}
               disabled={loading}

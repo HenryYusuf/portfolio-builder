@@ -132,7 +132,7 @@ function SkillForm({
               name="level"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Level</FormLabel>
+                  <FormLabel>Level Skill</FormLabel>
                   <FormControl>
                     <Input
                       type="number"

@@ -38,12 +38,12 @@ function ExperiencesTable({ experiences }: { experiences: IExperience[] }) {
   const router = useRouter();
   const columns = [
     "Role",
-    "Company",
-    "Start Date",
-    "End Date",
-    "Location",
-    "Created At",
-    "Actions",
+    "Perusahaan",
+    "Tahun Mulai",
+    "Tahun Selesai",
+    "Lokasi",
+    "Dibuat Pada",
+    "Aksi",
   ];
 
   const deleteExperienceHandler = async (id: string | null) => {
@@ -131,7 +131,7 @@ function ExperiencesTable({ experiences }: { experiences: IExperience[] }) {
             <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
             <AlertDialogDescription>
               This action cannot be undone. This will permanently delete your
-              account and remove your data from our servers.
+              data and remove your data from our servers.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
